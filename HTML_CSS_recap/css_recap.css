@@ -1,0 +1,19 @@
+body {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+a:hover {
+  color: yellow;
+}
+
+img {
+  border-radius: 25px;
+}
+
+tr:nth-child(even) {
+  background-color: yellow;
+}
+
+ul {
+  list-style-type: none;
+}
