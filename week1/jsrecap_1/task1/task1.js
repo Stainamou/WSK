@@ -1,3 +1,5 @@
+'use strict';
+
 let C = parseFloat(prompt("Enter the temperature in Celsius: "));
 
 let K, F

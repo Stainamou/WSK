@@ -1,3 +1,5 @@
+'use strict';
+
 let x1 = parseInt(prompt("Enter x1: "));
 let x2 = parseInt(prompt("Enter x2: "));
 let y1 = parseInt(prompt("Enter y1: "))
