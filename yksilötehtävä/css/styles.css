@@ -79,6 +79,23 @@ body {
   background-color: teal;
 }
 
+@media (max-width: 1024px) {
+  .container-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container, .map-container {
+    width: 80%;
+    margin: 20px 0;
+  }
+
+  #menu-details, #map-details {
+    width: 80%;
+    top: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .container-wrapper {
     flex-direction: column;
@@ -93,5 +110,32 @@ body {
   #menu-details, #map-details {
     width: 90%;
     top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar a {
+    padding: 8px 10px;
+    margin: 5px 0;
+  }
+
+  .container, .map-container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  #menu-details, #map-details {
+    width: 100%;
+    top: 5px;
   }
 }
