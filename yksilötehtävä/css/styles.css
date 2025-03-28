@@ -34,3 +34,47 @@ body {
   margin: 0;
   font-family: "Lucida Console", "Courier New", monospace;
 }
+
+.container-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 200px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 750px;
+  width: 30%;
+  margin-left: 400px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 750px;
+  width: 30%;
+  margin-right: 400px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+}
+
+#menu-details {
+  position: absolute;
+  top: 297px;
+  width: 30%;
+  text-align: center;
+  background-color: teal;
+}
+
+#map-details {
+  position: absolute;
+  top: 297px;
+  width: 30%;
+  text-align: center;
+  background-color: teal;
+}
