@@ -78,3 +78,20 @@ body {
   text-align: center;
   background-color: teal;
 }
+
+@media (max-width: 768px) {
+  .container-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container, .map-container {
+    max-width: 90%;
+    margin-bottom: 20px;
+  }
+
+  #menu-details, #map-details {
+    width: 90%;
+    top: 10px;
+  }
+}
