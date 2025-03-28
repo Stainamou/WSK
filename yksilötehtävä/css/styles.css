@@ -1,0 +1,36 @@
+header {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h1 {
+  margin: 0;
+  padding: 25px;
+  background-color: teal;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  background-color: #444;
+  border-radius: 15px;
+}
+
+.navbar a:hover {
+  background-color: teal;
+}
+
+body {
+  margin: 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
