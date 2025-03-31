@@ -25,8 +25,9 @@ async function fetchData(url, options) {
       body: JSON.stringify(user),
     };
     const userData = await fetchData(url, options);
-    console.log(userData);
+    document.body.innerHTML = `<pre>${JSON.stringify(userData, null, 2)}</pre>`;
   } catch (error) {
     console.error('An error occurred:', error);
+    document.body.innerHTML = `<p>An error occurred: ${error.message}</p>`;
   }
 })();

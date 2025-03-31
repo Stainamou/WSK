@@ -6,7 +6,7 @@ async function fetchData() {
       return;
     }
     const data = await response.json();
-    console.log(data);
+    document.getElementById('user-data').innerText = JSON.stringify(data, null, 2);
   } catch (error) {
     console.error('Fetch GET request failed:', error);
   }
@@ -24,7 +24,7 @@ async function createUser() {
       return;
     }
     const data = await response.json();
-    console.log(data);
+    document.getElementById('user-data').innerText = JSON.stringify(data, null, 2);
   } catch (error) {
     console.error('Fetch POST request failed:', error);
   }
@@ -42,7 +42,7 @@ async function updateUser() {
       return;
     }
     const data = await response.json();
-    console.log(data);
+    document.getElementById('user-data').innerText = JSON.stringify(data, null, 2);
   } catch (error) {
     console.error('Fetch PUT request failed:', error);
   }
@@ -57,7 +57,7 @@ async function deleteUser() {
       console.error(`DELETE request failed with status: ${response.status}`);
       return;
     }
-    console.log('User deleted successfully');
+    document.getElementById('user-data').innerText = 'User deleted successfully';
   } catch (error) {
     console.error('Fetch DELETE request failed:', error);
   }
