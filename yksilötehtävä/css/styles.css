@@ -41,26 +41,49 @@ body {
   margin-top: 200px;
 }
 
-.container {
+.container, .map-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   height: 750px;
   width: 30%;
-  margin-left: 400px;
+  margin: auto; /* Center dynamically */
   background-color: lightgray;
   border: 1px solid #ccc;
+  overflow-y: auto;
 }
 
-.map-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 750px;
-  width: 30%;
-  margin-right: 400px;
-  background-color: lightgray;
+@media (max-width: 1024px) {
+  .container, .map-container {
+    width: 80%; /* Adjust width for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .container, .map-container {
+    width: 90%; /* Further adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .container, .map-container {
+    width: 100%; /* Full width for very small screens */
+  }
+}
+
+.restaurant-row {
+  width: 90%; /* Set a fixed width for rows */
+  padding: 10px;
+  margin: 5px 0;
+  background-color: white;
   border: 1px solid #ccc;
+  text-align: center; /* Center text */
+  cursor: pointer;
+}
+
+.restaurant-row:hover {
+  background-color: #f0f0f0;
 }
 
 #menu-details {
