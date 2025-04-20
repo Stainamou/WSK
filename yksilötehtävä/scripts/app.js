@@ -26,7 +26,7 @@ async function fetchData(url, options = {}) {
     if (json.message) {
       throw new Error(`${json.message}, code:${response.status}`);
     }
-    throw new Error(`Error ${response.status} occured!`);
+    throw new Error(`Error ${response.status} occurred!`);
   }
   return json;
 }
@@ -116,11 +116,41 @@ function createTable() {
   }
 }
 
+function initializeMap() {
+  const map = L.map('map').setView([60.1695, 24.9354], 13); // Centered on Helsinki
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  return map;
+}
+
+function addRestaurantMarkers(map, restaurants) {
+  restaurants.forEach(restaurant => {
+    if (restaurant.location && restaurant.location.coordinates) {
+      console.log(`Adding marker for ${restaurant.name} at ${restaurant.location.coordinates}`);
+      const { coordinates } = restaurant.location;
+      const marker = L.marker([coordinates[1], coordinates[0]]).addTo(map);
+
+      marker.bindPopup(`
+        <h3>${restaurant.name}</h3>
+        <p>${restaurant.address}</p>
+      `);
+    } else {
+      console.warn(`Missing coordinates for ${restaurant.name}`);
+    }
+  });
+}
+
 async function main() {
   try {
     await getRestaurants();
     sortRestaurants();
     createTable();
+
+    const map = initializeMap();
+    addRestaurantMarkers(map, restaurants);
   } catch (error) {
     console.error(error);
   }
