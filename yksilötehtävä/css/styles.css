@@ -46,9 +46,9 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 750px;
-  width: 30%;
-  margin: auto; /* Center dynamically */
+  height: 550px;
+  width: 45%;
+  margin: auto;
   background-color: lightgray;
   border: 1px solid #ccc;
   overflow-y: auto;
@@ -87,19 +87,21 @@ body {
 }
 
 #menu-details {
-  position: absolute;
-  top: 297px;
-  width: 30%;
+  position: relative;
+  width: 100%;
   text-align: center;
   background-color: teal;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 #map-details {
-  position: absolute;
-  top: 297px;
-  width: 30%;
+  position: relative;
+  width: 100%;
   text-align: center;
   background-color: teal;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 1024px) {

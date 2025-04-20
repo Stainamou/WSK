@@ -1,6 +1,23 @@
 const apiUrl = 'https://media2.edu.metropolia.fi/restaurant/api/v1'
 const modal = document.querySelector('#modal');
 let restaurants = [];
+let selectedMenuType = 'daily';
+
+async function getWeeklyMenu(id, lang) {
+  try {
+    return await fetchData(`${apiUrl}/restaurants/weekly/${id}/${lang}`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+document.getElementById('daily-menu-btn').addEventListener('click', () => {
+  selectedMenuType = 'daily';
+});
+
+document.getElementById('weekly-menu-btn').addEventListener('click', () => {
+  selectedMenuType = 'weekly';
+});
 
 async function fetchData(url, options = {}) {
   const response = await fetch(url, options);
@@ -78,7 +95,12 @@ function createTable() {
 
         restaurantDiv.classList.add('highlight');
 
-        const coursesResponse = await getDailyMenu(restaurant._id, 'fi');
+        let coursesResponse;
+        if (selectedMenuType === 'daily') {
+          coursesResponse = await getDailyMenu(restaurant._id, 'fi');
+        } else {
+          coursesResponse = await getWeeklyMenu(restaurant._id, 'fi');
+        }
         const menuHtml = createMenuHtml(coursesResponse.courses);
 
         modal.innerHTML = '';
