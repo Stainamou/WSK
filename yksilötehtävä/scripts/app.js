@@ -4,6 +4,7 @@ let restaurants = [];
 let selectedMenuType = 'daily';
 let map;
 let markers = [];
+let favorites = [];
 
 async function getWeeklyMenu(id, lang) {
   try {
@@ -89,6 +90,13 @@ function createTable() {
     const restaurantDiv = document.createElement('div');
     restaurantDiv.classList.add('restaurant-row');
     restaurantDiv.innerText = `${restaurant.name}, ${restaurant.address}, ${restaurant.city}`;
+
+    const favoriteButton = document.createElement('button');
+    favoriteButton.innerText = '★';
+    favoriteButton.classList.add('favorite-btn');
+    favoriteButton.addEventListener('click', () => toggleFavorite(restaurant));
+    restaurantDiv.appendChild(favoriteButton);
+
     restaurantDiv.addEventListener('click', async function () {
       try {
         for (const elem of document.querySelectorAll('.highlight')) {
@@ -178,8 +186,41 @@ function addRestaurantMarkers(map, restaurants) {
   });
 }
 
+function toggleFavorite(restaurant) {
+  const index = favorites.findIndex(fav => fav._id === restaurant._id);
+  if (index === -1) {
+    favorites.push(restaurant);
+    console.log(`${restaurant.name} added to favorites`);
+  } else {
+    favorites.splice(index, 1);
+    console.log(`${restaurant.name} removed from favorites`);
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  updateFavoritesUI();
+}
+
+function updateFavoritesUI() {
+  const favoriteButtons = document.querySelectorAll('.favorite-btn');
+  favoriteButtons.forEach(button => {
+    const restaurantDiv = button.parentElement;
+    const restaurantName = restaurantDiv.innerText.split(',')[0];
+    const isFavorite = favorites.some(fav => fav.name === restaurantName);
+
+    button.style.color = isFavorite ? 'gold' : 'black';
+  });
+}
+
+function loadFavorites() {
+  const storedFavorites = localStorage.getItem('favorites');
+  if (storedFavorites) {
+    favorites = JSON.parse(storedFavorites);
+  }
+}
+
 async function main() {
   try {
+    loadFavorites();
     await getRestaurants();
     sortRestaurants();
     createTable();
@@ -189,6 +230,8 @@ async function main() {
 
     document.getElementById('filter-city').addEventListener('input', filterRestaurants);
     document.getElementById('filter-provider').addEventListener('input', filterRestaurants);
+
+    updateFavoritesUI();
   } catch (error) {
     console.error(error);
   }
