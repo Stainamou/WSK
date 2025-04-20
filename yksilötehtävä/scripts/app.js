@@ -116,6 +116,21 @@ function createTable() {
   }
 }
 
+function filterRestaurants() {
+  const city = document.getElementById('filter-city').value.toLowerCase();
+  const provider = document.getElementById('filter-provider').value.toLowerCase();
+
+  const filtered = restaurants.filter(r => {
+    const matchesCity = !city || r.city.toLowerCase().includes(city);
+    const matchesProvider = !provider || r.company.toLowerCase().includes(provider);
+    return matchesCity && matchesProvider;
+  });
+
+  createTable(filtered);
+  const map = initializeMap();
+  addRestaurantMarkers(map, filtered);
+}
+
 function initializeMap() {
   const map = L.map('map').setView([60.1695, 24.9354], 13); // Centered on Helsinki
 
@@ -151,6 +166,9 @@ async function main() {
 
     const map = initializeMap();
     addRestaurantMarkers(map, restaurants);
+
+    document.getElementById('filter-city').addEventListener('input', filterRestaurants);
+    document.getElementById('filter-provider').addEventListener('input', filterRestaurants);
   } catch (error) {
     console.error(error);
   }

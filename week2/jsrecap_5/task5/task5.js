@@ -1,10 +1,19 @@
-import {fetchData} from '../lib/fetchData.js';
-
 const apiUrl = 'https://media2.edu.metropolia.fi/restaurant/api/v1';
 const taulukko = document.querySelector('#target');
 const modal = document.querySelector('#modal');
 let restaurants = [];
 
+async function fetchData(url, options = {}) {
+  const response = await fetch(url, options);
+  const json = await response.json();
+  if (!response.ok) {
+    if (json.message) {
+      throw new Error(`${json.message}, code:${response.status}`);
+    }
+    throw new Error(`Error ${response.status} occured!`);
+  }
+  return json;
+}
 
 function createRestaurantCells(restaurant, tr) {
   const nameTd = document.createElement('td');
