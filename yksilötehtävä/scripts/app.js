@@ -94,7 +94,10 @@ function createTable() {
     const favoriteButton = document.createElement('button');
     favoriteButton.innerText = '★';
     favoriteButton.classList.add('favorite-btn');
-    favoriteButton.addEventListener('click', () => toggleFavorite(restaurant));
+    favoriteButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      toggleFavorite(restaurant)
+    });
     restaurantDiv.appendChild(favoriteButton);
 
     restaurantDiv.addEventListener('click', async function () {
