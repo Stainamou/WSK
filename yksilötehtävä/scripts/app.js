@@ -221,6 +221,24 @@ function loadFavorites() {
   }
 }
 
+function handleFavoritesButton() {
+  modal.innerHTML = '<h3>Favorites Restaurants</h3>';
+
+  if (favorites.length === 0) {
+    modal.innerHTML += '<p>No favorite restaurants yet.</p>';
+  } else {
+    const favoritesList = document.createElement('ul');
+    favorites.forEach(favorite => {
+      const listItem = document.createElement('li');
+      listItem.innerText = `${favorite.name}, ${favorite.city}`;
+      favoritesList.appendChild(listItem);
+    });
+    modal.appendChild(favoritesList);
+  }
+
+  modal.showModal();
+}
+
 async function main() {
   try {
     loadFavorites();
@@ -233,6 +251,7 @@ async function main() {
 
     document.getElementById('filter-city').addEventListener('input', filterRestaurants);
     document.getElementById('filter-provider').addEventListener('input', filterRestaurants);
+    document.getElementById('fav').addEventListener('click', handleFavoritesButton);
 
     updateFavoritesUI();
   } catch (error) {
