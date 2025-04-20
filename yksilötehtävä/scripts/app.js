@@ -101,7 +101,15 @@ function createTable() {
         } else {
           coursesResponse = await getWeeklyMenu(restaurant._id, 'fi');
         }
-        const menuHtml = createMenuHtml(coursesResponse.courses);
+
+        console.log('Courses Response:', coursesResponse);
+
+        const courses = coursesResponse?.courses || [];
+        if (!courses.length) {
+          console.warn('No courses available for this restaurant.');
+        }
+
+        const menuHtml = createMenuHtml(courses);
 
         modal.innerHTML = '';
         modal.showModal();
