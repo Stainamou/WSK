@@ -239,6 +239,16 @@ function handleFavoritesButton() {
   modal.showModal();
 }
 
+function handleContactButton() {
+  modal.innerHTML = `
+  <h3>Contact</h3>
+  <p>Address: 123 Bing Bong Street, Helsinki</p>
+  <p>Phone: +358 123456789</p>
+  <p>Email: studentrestaurants@example.com</p>
+`;
+  modal.showModal();
+}
+
 async function main() {
   try {
     loadFavorites();
@@ -252,6 +262,7 @@ async function main() {
     document.getElementById('filter-city').addEventListener('input', filterRestaurants);
     document.getElementById('filter-provider').addEventListener('input', filterRestaurants);
     document.getElementById('fav').addEventListener('click', handleFavoritesButton);
+    document.getElementById('contact').addEventListener('click', handleContactButton);
 
     updateFavoritesUI();
   } catch (error) {
