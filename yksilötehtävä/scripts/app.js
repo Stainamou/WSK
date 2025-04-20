@@ -2,6 +2,8 @@ const apiUrl = 'https://media2.edu.metropolia.fi/restaurant/api/v1'
 const modal = document.querySelector('#modal');
 let restaurants = [];
 let selectedMenuType = 'daily';
+let map;
+let markers = [];
 
 async function getWeeklyMenu(id, lang) {
   try {
@@ -140,7 +142,11 @@ function filterRestaurants() {
 }
 
 function initializeMap() {
-  const map = L.map('map').setView([60.1695, 24.9354], 13); // Centered on Helsinki
+  if (map) {
+    return map;
+  }
+
+  map = L.map('map').setView([60.1695, 24.9354], 13); // Centered on Helsinki
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -150,6 +156,10 @@ function initializeMap() {
 }
 
 function addRestaurantMarkers(map, restaurants) {
+  markers.forEach(marker => map.removeLayer(marker));
+  markers = [];
+
+
   restaurants.forEach(restaurant => {
     if (restaurant.location && restaurant.location.coordinates) {
       console.log(`Adding marker for ${restaurant.name} at ${restaurant.location.coordinates}`);
@@ -160,6 +170,8 @@ function addRestaurantMarkers(map, restaurants) {
         <h3>${restaurant.name}</h3>
         <p>${restaurant.address}</p>
       `);
+
+      markers.push(marker);
     } else {
       console.warn(`Missing coordinates for ${restaurant.name}`);
     }
